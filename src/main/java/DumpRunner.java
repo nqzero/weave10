@@ -11,7 +11,7 @@ source readme.sh
 $java10/bin/java -cp target/classes:$cp DumpRunner
 $java10/bin/javap -v -p -c -s -l Win.class > y9.dump
 $java10/bin/java -cp .:w9:t9:$cp Win
-$java10/bin/java -cp $cpasmu org.objectweb.asm.util.ASMifier w9/Win.class > w9.java
+$java10/bin/java -cp $cpasmu org.objectweb.asm.util.ASMifier w9/Win.class > src/main/java/WinDump.java
 
 
 
