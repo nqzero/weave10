@@ -4,13 +4,13 @@
 
 
 
-import kilim.Task;
+import kilim.Pausable;
 
-public class Win {
-
+public interface Win {
+    void execute() throws Pausable, Exception;
     
     public static void main(String[] args) throws Exception {
-        kilim.Pausable.Fork mytask = () -> {
+        Win mytask = () -> {
             System.out.println(args);
         };
     }

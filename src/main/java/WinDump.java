@@ -19,11 +19,9 @@ FieldVisitor fieldVisitor;
 MethodVisitor methodVisitor;
 AnnotationVisitor annotationVisitor0;
 
-classWriter.visit(V9, ACC_PUBLIC | ACC_SUPER, "Win", null, "java/lang/Object", null);
+classWriter.visit(V9, ACC_PUBLIC | ACC_ABSTRACT | ACC_INTERFACE, "Win", null, "java/lang/Object", null);
 
 classWriter.visitSource("Win.java", null);
-
-classWriter.visitInnerClass("kilim/Pausable$Fork", "kilim/Pausable", "Fork", ACC_PUBLIC | ACC_STATIC | ACC_ABSTRACT | ACC_INTERFACE);
 
 classWriter.visitInnerClass("java/lang/invoke/MethodHandles$Lookup", "java/lang/invoke/MethodHandles", "Lookup", ACC_PUBLIC | ACC_FINAL | ACC_STATIC);
 
@@ -32,18 +30,15 @@ fieldVisitor = classWriter.visitField(ACC_PUBLIC | ACC_FINAL | ACC_STATIC, "$isW
 fieldVisitor.visitEnd();
 }
 {
-methodVisitor = classWriter.visitMethod(ACC_PUBLIC, "<init>", "()V", null, null);
+methodVisitor = classWriter.visitMethod(ACC_PUBLIC | ACC_ABSTRACT, "execute", "()V", null, new String[] { "kilim/Pausable", "java/lang/Exception" });
+methodVisitor.visitEnd();
+}
+{
+methodVisitor = classWriter.visitMethod(ACC_PUBLIC, "execute", "(Lkilim/Fiber;)V", null, new String[] { "kilim/Pausable", "java/lang/Exception" });
 methodVisitor.visitCode();
-Label label0 = new Label();
-methodVisitor.visitLabel(label0);
-methodVisitor.visitLineNumber(9, label0);
-methodVisitor.visitVarInsn(ALOAD, 0);
-methodVisitor.visitMethodInsn(INVOKESPECIAL, "java/lang/Object", "<init>", "()V", false);
+methodVisitor.visitMethodInsn(INVOKESTATIC, "kilim/Task", "errNotWoven", "()V", false);
 methodVisitor.visitInsn(RETURN);
-Label label1 = new Label();
-methodVisitor.visitLabel(label1);
-methodVisitor.visitLocalVariable("this", "LWin;", null, label0, label1, 0);
-methodVisitor.visitMaxs(1, 1);
+methodVisitor.visitMaxs(0, 2);
 methodVisitor.visitEnd();
 }
 {
@@ -53,7 +48,7 @@ Label label0 = new Label();
 methodVisitor.visitLabel(label0);
 methodVisitor.visitLineNumber(13, label0);
 methodVisitor.visitVarInsn(ALOAD, 0);
-methodVisitor.visitInvokeDynamicInsn("execute", "([Ljava/lang/String;)Lkilim/Pausable$Fork;", new Handle(Opcodes.H_INVOKESTATIC, "java/lang/invoke/LambdaMetafactory", "metafactory", "(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;", false), new Object[]{Type.getType("(Lkilim/Fiber;)V"), new Handle(Opcodes.H_INVOKESTATIC, "Win", "lambda$main$0", "([Ljava/lang/String;Lkilim/Fiber;)V", false), Type.getType("(Lkilim/Fiber;)V")});
+methodVisitor.visitInvokeDynamicInsn("execute", "([Ljava/lang/String;)LWin;", new Handle(Opcodes.H_INVOKESTATIC, "java/lang/invoke/LambdaMetafactory", "metafactory", "(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;", false), new Object[]{Type.getType("(Lkilim/Fiber;)V"), new Handle(Opcodes.H_INVOKESTATIC, "Win", "lambda$main$0", "([Ljava/lang/String;Lkilim/Fiber;)V", false), Type.getType("(Lkilim/Fiber;)V")});
 methodVisitor.visitVarInsn(ASTORE, 1);
 Label label1 = new Label();
 methodVisitor.visitLabel(label1);
@@ -62,7 +57,7 @@ methodVisitor.visitInsn(RETURN);
 Label label2 = new Label();
 methodVisitor.visitLabel(label2);
 methodVisitor.visitLocalVariable("args", "[Ljava/lang/String;", null, label0, label2, 0);
-methodVisitor.visitLocalVariable("mytask", "Lkilim/Pausable$Fork;", null, label1, label2, 1);
+methodVisitor.visitLocalVariable("mytask", "LWin;", null, label1, label2, 1);
 methodVisitor.visitMaxs(1, 2);
 methodVisitor.visitEnd();
 }
@@ -88,7 +83,7 @@ methodVisitor.visitEnd();
 {
 methodVisitor = classWriter.visitMethod(ACC_PRIVATE | ACC_STATIC | ACC_SYNTHETIC, "lambda$main$0", "([Ljava/lang/String;)V", null, new String[] { "kilim/Pausable", "java/lang/Exception" });
 methodVisitor.visitCode();
-methodVisitor.visitMethodInsn(INVOKESTATIC, "kilim/Task", "errNotWoven", "()V", false);
+methodVisitor.visitMethodInsn(INVOKESTATIC, "kilim/Task", "errNotWoven", "()V", true);
 methodVisitor.visitInsn(RETURN);
 methodVisitor.visitMaxs(0, 1);
 methodVisitor.visitEnd();
