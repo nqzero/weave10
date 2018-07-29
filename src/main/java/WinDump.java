@@ -57,23 +57,12 @@ methodVisitor.visitInvokeDynamicInsn("execute", "([Ljava/lang/String;)Lkilim/Pau
 methodVisitor.visitVarInsn(ASTORE, 1);
 Label label1 = new Label();
 methodVisitor.visitLabel(label1);
-methodVisitor.visitLineNumber(17, label1);
-methodVisitor.visitVarInsn(ALOAD, 1);
-methodVisitor.visitMethodInsn(INVOKESTATIC, "kilim/Task", "fork", "(Lkilim/Pausable$Fork;)Lkilim/Task;", false);
-methodVisitor.visitMethodInsn(INVOKEVIRTUAL, "kilim/Task", "joinb", "()Lkilim/ExitMsg;", false);
-methodVisitor.visitInsn(POP);
+methodVisitor.visitLineNumber(16, label1);
+methodVisitor.visitInsn(RETURN);
 Label label2 = new Label();
 methodVisitor.visitLabel(label2);
-methodVisitor.visitLineNumber(19, label2);
-methodVisitor.visitMethodInsn(INVOKESTATIC, "kilim/Task", "idledown", "()V", false);
-Label label3 = new Label();
-methodVisitor.visitLabel(label3);
-methodVisitor.visitLineNumber(20, label3);
-methodVisitor.visitInsn(RETURN);
-Label label4 = new Label();
-methodVisitor.visitLabel(label4);
-methodVisitor.visitLocalVariable("args", "[Ljava/lang/String;", null, label0, label4, 0);
-methodVisitor.visitLocalVariable("mytask", "Lkilim/Pausable$Fork;", null, label1, label4, 1);
+methodVisitor.visitLocalVariable("args", "[Ljava/lang/String;", null, label0, label2, 0);
+methodVisitor.visitLocalVariable("mytask", "Lkilim/Pausable$Fork;", null, label1, label2, 1);
 methodVisitor.visitMaxs(1, 2);
 methodVisitor.visitEnd();
 }

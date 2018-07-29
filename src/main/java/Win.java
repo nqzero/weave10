@@ -13,10 +13,6 @@ public class Win {
         kilim.Pausable.Fork mytask = () -> {
             System.out.println(args);
         };
-
-        Task.fork(mytask).joinb();
-        
-        Task.idledown();
     }
 
     
