@@ -4,22 +4,17 @@
 
 
 
-import kilim.Mailbox;
 import kilim.Task;
 
 public class Win {
 
     
     public static void main(String[] args) throws Exception {
-        Mailbox<Integer> mb = new Mailbox();
         kilim.Pausable.Fork mytask = () -> {
-            Task.sleep(1000);
-            mb.put(1);
+            System.out.println(args);
         };
 
-        Task.fork(mytask);
-        int tmp = mb.getb();
-        System.out.println("tmp: " + tmp);
+        Task.fork(mytask).joinb();
         
         Task.idledown();
     }
