@@ -23,6 +23,8 @@ classWriter.visit(V9, ACC_PUBLIC | ACC_ABSTRACT | ACC_INTERFACE, "Win", null, "j
 
 classWriter.visitSource("Win.java", null);
 
+classWriter.visitInnerClass("Win$Fork", "Win", "Fork", ACC_PUBLIC | ACC_STATIC);
+
 classWriter.visitInnerClass("java/lang/invoke/MethodHandles$Lookup", "java/lang/invoke/MethodHandles", "Lookup", ACC_PUBLIC | ACC_FINAL | ACC_STATIC);
 
 {
@@ -46,19 +48,33 @@ methodVisitor = classWriter.visitMethod(ACC_PUBLIC | ACC_STATIC, "main", "([Ljav
 methodVisitor.visitCode();
 Label label0 = new Label();
 methodVisitor.visitLabel(label0);
-methodVisitor.visitLineNumber(13, label0);
+methodVisitor.visitLineNumber(22, label0);
 methodVisitor.visitVarInsn(ALOAD, 0);
 methodVisitor.visitInvokeDynamicInsn("execute", "([Ljava/lang/String;)LWin;", new Handle(Opcodes.H_INVOKESTATIC, "java/lang/invoke/LambdaMetafactory", "metafactory", "(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;", false), new Object[]{Type.getType("(Lkilim/Fiber;)V"), new Handle(Opcodes.H_INVOKESTATIC, "Win", "lambda$main$0", "([Ljava/lang/String;Lkilim/Fiber;)V", true), Type.getType("(Lkilim/Fiber;)V")});
 methodVisitor.visitVarInsn(ASTORE, 1);
 Label label1 = new Label();
 methodVisitor.visitLabel(label1);
-methodVisitor.visitLineNumber(16, label1);
-methodVisitor.visitInsn(RETURN);
+methodVisitor.visitLineNumber(25, label1);
+methodVisitor.visitTypeInsn(NEW, "Win$Fork");
+methodVisitor.visitInsn(DUP);
+methodVisitor.visitVarInsn(ALOAD, 1);
+methodVisitor.visitMethodInsn(INVOKESPECIAL, "Win$Fork", "<init>", "(LWin;)V", false);
+methodVisitor.visitMethodInsn(INVOKEVIRTUAL, "Win$Fork", "start", "()Lkilim/Task;", false);
+methodVisitor.visitMethodInsn(INVOKEVIRTUAL, "kilim/Task", "joinb", "()Lkilim/ExitMsg;", false);
+methodVisitor.visitInsn(POP);
 Label label2 = new Label();
 methodVisitor.visitLabel(label2);
-methodVisitor.visitLocalVariable("args", "[Ljava/lang/String;", null, label0, label2, 0);
-methodVisitor.visitLocalVariable("mytask", "LWin;", null, label1, label2, 1);
-methodVisitor.visitMaxs(1, 2);
+methodVisitor.visitLineNumber(26, label2);
+methodVisitor.visitMethodInsn(INVOKESTATIC, "kilim/Task", "idledown", "()V", false);
+Label label3 = new Label();
+methodVisitor.visitLabel(label3);
+methodVisitor.visitLineNumber(27, label3);
+methodVisitor.visitInsn(RETURN);
+Label label4 = new Label();
+methodVisitor.visitLabel(label4);
+methodVisitor.visitLocalVariable("args", "[Ljava/lang/String;", null, label0, label4, 0);
+methodVisitor.visitLocalVariable("mytask", "LWin;", null, label1, label4, 1);
+methodVisitor.visitMaxs(3, 2);
 methodVisitor.visitEnd();
 }
 {
@@ -66,13 +82,13 @@ methodVisitor = classWriter.visitMethod(ACC_PRIVATE | ACC_STATIC | ACC_SYNTHETIC
 methodVisitor.visitCode();
 Label label0 = new Label();
 methodVisitor.visitLabel(label0);
-methodVisitor.visitLineNumber(14, label0);
+methodVisitor.visitLineNumber(23, label0);
 methodVisitor.visitFieldInsn(GETSTATIC, "java/lang/System", "out", "Ljava/io/PrintStream;");
 methodVisitor.visitVarInsn(ALOAD, 0);
 methodVisitor.visitMethodInsn(INVOKEVIRTUAL, "java/io/PrintStream", "println", "(Ljava/lang/Object;)V", false);
 Label label1 = new Label();
 methodVisitor.visitLabel(label1);
-methodVisitor.visitLineNumber(15, label1);
+methodVisitor.visitLineNumber(24, label1);
 methodVisitor.visitInsn(RETURN);
 Label label2 = new Label();
 methodVisitor.visitLabel(label2);

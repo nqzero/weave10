@@ -6,14 +6,30 @@
 
 import kilim.Fiber;
 import kilim.Pausable;
+import kilim.Task;
 
 public interface Loss {
+    static public final boolean $isWoven = true;
+    
     void execute(Fiber fiber) throws Pausable, Exception;
+    default void execute() throws Pausable, Exception {
+        Task.errNotWoven();
+    }
+
+    public static class Fork extends Task {
+        Loss body;
+        public Fork(Loss body) { this.body = body; }
+        public void execute() throws Pausable, Exception {
+            body.execute();
+        }
+    }
     
     public static void main(String[] args) throws Exception {
         Loss mytask = fiber -> {
             System.out.println(args);
         };
+        new Fork(mytask).start().joinb();
+        Task.idledown();
     }
 
     
