@@ -2,6 +2,8 @@ name="Win.class"
 cargs="-g"
 pargs="-v -p -c -s -l"
 
+rm t?/*.class w?/*.class
+
          $java8/bin/javac $cargs -cp $cp -d t8 src/main/java/*.java
          $java9/bin/javac $cargs -cp $cp -d t9 src/main/java/*.java
          $java10/bin/javac $cargs -cp $cp -d t0 src/main/java/*.java
