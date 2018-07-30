@@ -38,8 +38,17 @@ methodVisitor.visitEnd();
 {
 methodVisitor = classWriter.visitMethod(ACC_PUBLIC, "execute", "(Lkilim/Fiber;)V", null, new String[] { "kilim/Pausable", "java/lang/Exception" });
 methodVisitor.visitCode();
+Label label0 = new Label();
+methodVisitor.visitLabel(label0);
+methodVisitor.visitLineNumber(16, label0);
 methodVisitor.visitMethodInsn(INVOKESTATIC, "kilim/Task", "errNotWoven", "()V", false);
+Label label1 = new Label();
+methodVisitor.visitLabel(label1);
+methodVisitor.visitLineNumber(17, label1);
 methodVisitor.visitInsn(RETURN);
+Label label2 = new Label();
+methodVisitor.visitLabel(label2);
+methodVisitor.visitLocalVariable("this", "LLoss;", null, label0, label2, 0);
 methodVisitor.visitMaxs(0, 2);
 methodVisitor.visitEnd();
 }
@@ -94,14 +103,6 @@ Label label2 = new Label();
 methodVisitor.visitLabel(label2);
 methodVisitor.visitLocalVariable("args", "[Ljava/lang/String;", null, label0, label2, 0);
 methodVisitor.visitMaxs(2, 2);
-methodVisitor.visitEnd();
-}
-{
-methodVisitor = classWriter.visitMethod(ACC_PRIVATE | ACC_STATIC | ACC_SYNTHETIC, "lambda$main$0", "([Ljava/lang/String;)V", null, new String[] { "kilim/Pausable", "java/lang/Exception" });
-methodVisitor.visitCode();
-methodVisitor.visitMethodInsn(INVOKESTATIC, "kilim/Task", "errNotWoven", "()V", true);
-methodVisitor.visitInsn(RETURN);
-methodVisitor.visitMaxs(0, 1);
 methodVisitor.visitEnd();
 }
 classWriter.visitEnd();
