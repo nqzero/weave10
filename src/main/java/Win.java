@@ -5,14 +5,25 @@
 
 
 import kilim.Pausable;
+import kilim.Task;
 
 public interface Win {
+
     void execute() throws Pausable, Exception;
+
+    public static class Fork extends Task {
+        Win body;
+        public Fork(Win body) { this.body = body; }
+        public void execute() throws Pausable, Exception {
+            body.execute();
+        }
+    }
     
     public static void main(String[] args) throws Exception {
         Win mytask = () -> {
             System.out.println(args);
         };
+        new Fork(mytask).start();
     }
 
     
