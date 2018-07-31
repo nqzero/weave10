@@ -8,8 +8,8 @@ import kilim.Pausable;
 import kilim.Task;
 
 public interface Win {
-
-    void execute() throws Pausable, Exception;
+    void execute(kilim.Fiber fiber) throws Pausable, Exception;
+    default void execute() throws Pausable, Exception {}
 
     public static class Fork extends Task {
         Win body;
@@ -20,7 +20,7 @@ public interface Win {
     }
     
     public static void main(String[] args) throws Exception {
-        Win mytask = () -> {
+        Win mytask = fiber -> {
             System.out.println(args);
         };
         new Fork(mytask).start();
