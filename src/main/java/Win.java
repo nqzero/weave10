@@ -6,14 +6,18 @@
 
 import kilim.Pausable;
 import kilim.Task;
+import kilim.Mailbox;
 
 public interface Win {
     
     public static void main(String[] args) throws Exception {
-        Pausable.Fork mytask = () -> {
-            System.out.println(args);
+        Mailbox<String> mb = new Mailbox<String>();
+        Pausable.Fork mytask = fiber -> {
+                String s = mb.get();  // mb captured from environment.
+                System.out.println(s);
         };
-        Task.fork(mytask).joinb();
+        Task.fork(mytask);
+                mb.putb("Hello from " + 0);  // mb and fi captured from environment
         Task.idledown();
     }
 
