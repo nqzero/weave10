@@ -9,13 +9,13 @@ import kilim.Pausable;
 import kilim.Task;
 import kilim.Mailbox;
 
-public interface Win {
-    void execute(Fiber fiber) throws Pausable, Exception;
-    default void execute() throws Pausable, Exception {}
-    
+public interface Wip {
+    void execute() throws Pausable, Exception;
+    default void executp() throws Pausable, Exception {}
+
     public static class Fork extends Task {
-        Win body;
-        public Fork(Win body) { this.body = body; }
+        Wip body;
+        public Fork(Wip body) { this.body = body; }
         public void execute() throws Pausable, Exception {
             body.execute();
         }
@@ -24,7 +24,7 @@ public interface Win {
     public static void main(String[] args) throws Exception {
         if (kilim.tools.Kilim.trampoline(true,args)) return;
         Mailbox<String> mb = new Mailbox<String>();
-        Win mytask = fiber -> {
+        Wip mytask = () -> {
             String s = mb.get();  // mb captured from environment.
             System.out.println(s);
         };
