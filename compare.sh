@@ -27,3 +27,16 @@ rm t?/*.class w?/*.class
          $java10/bin/javap $pargs w3/* > y3
 
 
+
+
+
+# cpasmu=$(mvnrun org.ow2.asm:asm-util)
+# cp=$(mvn -q dependency:build-classpath -Dmdep.outputFile=/dev/fd/1)
+# cp1 is 2.0.0-16
+# cp2 is 2.0.0-18
+# $java10/bin/java -cp $cpasmu org.objectweb.asm.util.ASMifier w8/Win.class > src/main/java/WinDump.java
+# mvn package | tail
+# $java10/bin/java -cp target/classes:$cp DumpRunner
+# $java10/bin/java -cp w2:t2:$cp2 Win
+
+
